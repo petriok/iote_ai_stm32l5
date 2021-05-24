@@ -1,0 +1,8 @@
+# IOTE.AI L552ZE board configuration
+
+# Copyright (c) 2021 Petri Oksanen
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_IOTE_AI_L552ZE
+	bool "IOTE.AI L552ZE Development Board"
+	depends on SOC_STM32L552XX

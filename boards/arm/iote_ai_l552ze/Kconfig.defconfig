@@ -1,0 +1,19 @@
+# IOTE.AI L552ZE board configuration
+
+# Copyright (c) 2021 Petri Oksanen
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_IOTE_AI_L552ZE
+
+config BOARD
+	default "iote_ai_l552ze"
+
+if TRUSTED_EXECUTION_NONSECURE
+
+# Get flash configuration for NS image from dts flash partition
+config USE_DT_CODE_PARTITION
+	default y
+
+endif # TRUSTED_EXECUTION_NONSECURE
+
+endif # BOARD_NUCLEO_L552ZE_Q

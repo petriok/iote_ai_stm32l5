@@ -1,0 +1,11 @@
+identifier: iote_ai_l552ze_ns
+name: IOTE.AI L552ZE non secure
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+supported:
+  - gpio
+ram: 192
+flash: 328
