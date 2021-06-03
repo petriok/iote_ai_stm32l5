@@ -29,9 +29,18 @@
      };
  };
  
+ &cpu0 {
+	cpu-power-states = <&stop0 &stop1 &stop2>;
+};
+
  &usart3 {
-     pinctrl-0 = <&usart3_tx_pd8 &usart3_rx_pd9>;
-     current-speed = <115200>;
-     status = "okay";
+     hw-flow-control = true;
+     pinctrl-0 = <&usart3_tx_pd8
+                  &usart3_rx_pd9
+                  &usart3_rts_pd12
+                  &usart3_cts_pb13>;
  };
  
+ &lptim1 {
+	status = "okay";
+};

@@ -7,5 +7,14 @@ toolchain:
   - gnuarmemb
 supported:
   - gpio
+  - i2c
+  - counter
+  - dma
+  - lptim
+  - spi
+  - pwm
+  - adc
+  - watchdog
+  - usb_device
 ram: 192
 flash: 328
