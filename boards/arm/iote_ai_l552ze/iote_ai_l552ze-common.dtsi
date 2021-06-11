@@ -7,6 +7,8 @@
  #include <st/l5/stm32l552Xe.dtsi>
  #include <st/l5/stm32l552z(c-e)txq-pinctrl.dtsi>
  
+/* 0x4000D400UL usb */
+
  / {
      leds {
          compatible = "gpio-leds";

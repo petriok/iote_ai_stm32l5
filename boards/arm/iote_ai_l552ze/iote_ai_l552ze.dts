@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Petri Oksanen
+ * Copyright (c) 2021 Petri Oksanen
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -8,12 +8,73 @@
  #include "iote_ai_l552ze-common.dtsi"
  
  / {
+
      model = "IOTE.AI L552ZE board";
      compatible = "iote_ai,iote-ai-l552ze";
-
+ 
      #address-cells = <1>;
      #size-cells = <1>;
- 
+
+
+     soc {
+		usbotg_fs: otgfs@000d400 {
+			compatible = "st,stm32-otgfs";
+			reg = <0x000d400 0x40000>;
+			interrupts = <67 0>;
+			interrupt-names = "otgfs";
+			num-bidir-endpoints = <6>;
+			ram-size = <1280>;
+			maximum-speed = "full-speed";
+			phys = <&otgfs_phy>;
+			clocks = <&rcc STM32_CLOCK_BUS_AHB2 0x00001000>;
+			status = "disabled";
+			label= "OTGFS";
+		};
+/* 
+		can {
+			can1: can@4000d400 {
+				compatible = "st,stm32-fdcan";
+				#address-cells = <1>;
+				#size-cells = <0>;
+				reg = <0x4000d400 0x400>, <0x4000d800 0x400>;
+				reg-names = "m_can", "message_ram";
+				interrupts = <39 0>, <40 0>;
+				interrupt-names = "LINE_0", "LINE_1";
+				status = "disabled";
+				label = "CAN_1";
+			};
+		};
+*/
+	};
+
+	otgfs_phy: otgfs_phy {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		label = "OTGFS_PHY";
+	};
+
+     soc {
+        usb: usb@4000d400 {
+			compatible = "st,stm32-usb";
+			reg = <0x4000d400 0x40000>;
+			interrupts = <67 0>;
+			interrupt-names = "usb";
+			num-bidir-endpoints = <8>;
+			ram-size = <1024>;
+			maximum-speed = "full-speed";
+			phys = <&usb_fs_phy>;
+			clocks = <&rcc STM32_CLOCK_BUS_APB1 0x04000000>;
+			status = "disabled";
+			label = "USB";
+		};
+    };
+
+     usb_fs_phy: usbphy {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
+		label = "USB_FS_PHY";
+	};
+
      chosen {
          zephyr,console = &usart3;
          zephyr,shell-uart = &usart3;
@@ -26,21 +87,87 @@
         led1 = &blue_led_1;
         led2 = &red_led_1;
         sw0 = &user_button;
+        usb = &usbotg_fs;
      };
  };
  
  &cpu0 {
 	cpu-power-states = <&stop0 &stop1 &stop2>;
 };
-
- &usart3 {
-     hw-flow-control = true;
-     pinctrl-0 = <&usart3_tx_pd8
-                  &usart3_rx_pd9
-                  &usart3_rts_pd12
-                  &usart3_cts_pb13>;
- };
  
- &lptim1 {
+&lptim1 {
 	status = "okay";
 };
+
+&usart1 {
+    hw-flow-control;
+    pinctrl-0 = <&usart1_tx_pg9
+                 &usart1_rx_pg10>;
+/*                 &usart1_rts_pg12
+                 &usart1_cts_pg11>; */
+    current-speed = <115200>;
+    status = "okay";
+};
+
+&usart2 {
+    hw-flow-control;
+    pinctrl-0 = <&usart2_tx_pa2
+                 &usart2_rx_pa3
+                 &usart2_rts_pa1
+                 &usart2_cts_pa0>;
+    current-speed = <115200>;
+    status = "okay";
+};
+
+&usart3 {
+    hw-flow-control;
+    pinctrl-0 = <&usart3_tx_pd8
+                 &usart3_rx_pd9
+                 &usart3_rts_pd12
+                 &usart3_cts_pb13>;
+};
+
+&usbotg_fs {
+	status = "okay";
+	pinctrl-0 = <&usb_dm_pa11 &usb_dp_pa12>;
+};
+/*
+
+&can1 {
+	pinctrl-0 = <&can1_rx_pd0 &can1_tx_pd1>;
+	bus-speed = <125000>;
+	sjw = <1>;
+	prop-seg = <0>;
+	phase-seg1 = <6>;
+	phase-seg2 = <5>;
+	status = "disabled";
+};
+*/
+
+
+&spi1 {
+	pinctrl-0 = <&spi1_sck_pg2 &spi1_miso_pg3 &spi1_mosi_pg4>;
+	status = "okay";
+	cs-gpios = <&gpiog 5 GPIO_ACTIVE_LOW>;
+};
+
+&i2c1 {
+	pinctrl-0 = <&i2c1_scl_pg14 &i2c1_sda_pg13>;
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_FAST>;
+
+	mpu6050@68 {
+		compatible = "invensense,mpu6050";
+		reg = <0x68>;
+		status = "okay";
+		label = "MPU6050";
+		int-gpios = <&gpioa 8 GPIO_ACTIVE_HIGH>;
+/*		irq-gpios = <&gpioa 8 GPIO_ACTIVE_HIGH>; */
+	};
+};
+
+/*
+&rtc {
+	status = "okay";
+};
+*/
