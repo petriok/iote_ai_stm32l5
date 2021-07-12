@@ -15,7 +15,7 @@
      #address-cells = <1>;
      #size-cells = <1>;
 
-
+/* 
      soc {
 		usbotg_fs: otgfs@000d400 {
 			compatible = "st,stm32-otgfs";
@@ -30,6 +30,7 @@
 			status = "disabled";
 			label= "OTGFS";
 		};
+*/
 /* 
 		can {
 			can1: can@4000d400 {
@@ -45,14 +46,19 @@
 			};
 		};
 */
+/*
 	};
+*/
 
+/*
 	otgfs_phy: otgfs_phy {
 		compatible = "usb-nop-xceiv";
 		#phy-cells = <0>;
 		label = "OTGFS_PHY";
 	};
+*/
 
+/*
      soc {
         usb: usb@4000d400 {
 			compatible = "st,stm32-usb";
@@ -74,7 +80,7 @@
 		#phy-cells = <0>;
 		label = "USB_FS_PHY";
 	};
-
+*/
      chosen {
          zephyr,console = &usart3;
          zephyr,shell-uart = &usart3;
@@ -87,7 +93,7 @@
         led1 = &blue_led_1;
         led2 = &red_led_1;
         sw0 = &user_button;
-        usb = &usbotg_fs;
+  /*      usb = &usbotg_fs; */
      };
  };
  
@@ -120,17 +126,22 @@
 };
 
 &usart3 {
-    hw-flow-control;
+/*    hw-flow-control;
     pinctrl-0 = <&usart3_tx_pd8
                  &usart3_rx_pd9
                  &usart3_rts_pd12
                  &usart3_cts_pb13>;
+*/
+	pinctrl-0 = <&usart3_tx_pd8
+				 &usart3_rx_pd9>;
 };
 
+/* 
 &usbotg_fs {
-	status = "okay";
+	status = "disabled";
 	pinctrl-0 = <&usb_dm_pa11 &usb_dp_pa12>;
 };
+*/
 /*
 
 &can1 {

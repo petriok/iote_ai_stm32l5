@@ -54,18 +54,46 @@
 			min-residency-us = <900>;
 		};
 	};
- };
-  
+};
+/* 
+&clk_msi {
+	status = "okay";
+	msi-range = <6>;
+	msi-pll-mode;
+};
+
+&clk_lse {
+	status = "okay";
+};
+
+&pll {
+	div-m = <1>;
+	mul-n = <55>;
+	div-p = <7>;
+	div-q = <2>;
+	div-r = <2>;
+	clocks = <&clk_msi>;
+	status = "okay";
+};
+
+&rcc {
+	clocks = <&pll>;
+	clock-frequency = <DT_FREQ_M(110)>;
+	ahb-prescaler = <1>;
+	apb1-prescaler = <1>;
+	apb2-prescaler = <1>;
+};
+*/
  &clk_hse {
 	clock-frequency = <DT_FREQ_M(16)>;
 	status = "okay";
 };
 
  &pll {
-     div-m = <4>;
-     mul-n = <55>;
+     div-m = <2>;
+     mul-n = <24>;
      div-p = <7>;
-     div-q = <8>;
+     div-q = <4>;
      div-r = <2>;
      clocks = <&clk_hse>;
      status = "okay";
