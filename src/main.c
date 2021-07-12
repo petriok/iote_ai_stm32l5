@@ -13,6 +13,8 @@
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS   1000
 
+// #define CLOCK_CONFIG_OVERRIDE 1
+
 /* The devicetree node identifier for the "led0" alias. */
 #define LED0_NODE DT_ALIAS(led0)
 
@@ -28,8 +30,20 @@
 #define FLAGS	0
 #endif
 
+#ifdef CLOCK_CONFIG_OVERRIDE
+/* For overriding the clock config, for testing */
+extern void SystemClock_Config(void);
+extern void PeriphCommonClock_Config(void);
+#endif
+
 void main(void)
 {
+#ifdef CLOCK_CONFIG_OVERRIDE
+/* For overriding the clock config, for testing */
+	SystemClock_Config();
+	PeriphCommonClock_Config();
+#endif
+
 	printk("Hello World! %s\n", CONFIG_ARCH);
 	const struct device *dev;
 	bool led_is_on = true;
