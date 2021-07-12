@@ -14,7 +14,7 @@ custom board:
 - MIPI20T pin headers Lauterbach trace connector
 - Pin header for easily connecting the Lauterbach Analog Probe 
 - The board can be powered via external source or USB
-- NRF52832 for Bluetooth
+- NRF52840 for Bluetooth
 - Semtech SX1280 for LoRa
 - Integrated PCB antenna
 - Optionally UFL and SMA connectors for antennas
