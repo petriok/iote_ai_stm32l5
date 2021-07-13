@@ -1,6 +1,5 @@
 
 
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
@@ -98,5 +97,5 @@ Project Link: [https://github.com/petriok/iote_ai_stm32l5](https://github.com/pe
 [license-shield]: https://img.shields.io/github/license/petriok/repo.svg?style=for-the-badge
 [license-url]: https://github.com/petriok/repo/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/petriok
-[product-screenshot]: boards/arm/iote_ai_stm32l5/doc/img/iote_ai_l552ze.jpg
+[linkedin-url]: https://linkedin.com/in/petri-oksanen-b7b269b2/
+[product-screenshot]: boards/arm/iote_ai_l552ze/doc/img/iote_ai_l552ze.jpg
