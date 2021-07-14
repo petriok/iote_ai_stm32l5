@@ -55,6 +55,9 @@ The development board features are:
 * Semtech SX1280 for LoRa at 2.4GHz
 * Integrated PCB antenna
 * Optionally UFL and SMA connectors for antennas
+* QSPI flash
+* 3-axis gyroscope, 3-axis accelerometer
+* CAN transceiver
 
 
 ### Built With
